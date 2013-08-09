@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# This script starts guard and livereload for simplified theming
+
+cd docroot
+drush en sb_dev -y
+drush vset sb_dev_use_livereload TRUE
+cd ../
+bundle exec guard -i
+cd docroot
+drush vset sb_dev_use_livereload FALSE
+cd ../
