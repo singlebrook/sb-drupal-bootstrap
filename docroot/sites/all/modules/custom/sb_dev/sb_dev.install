@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * Implements hook_enable()
+ */
+function sb_dev_enable() {
+  // Redirect all outgoing mail to the local filesystem
+  variable_set('mail_system', array('default-system' => 'DevelMailLog'));
+}
+
+/**
+ * Implements hook_disable()
+ */
+function sb_dev_disable() {
+  // Stop redirecting all outgoing mail
+  variable_set('mail_system', array('default-system' => 'DefaultMailSystem'));
+}
+
+/**
+ * Implements hook_uninstall()
+ */
+function sb_dev_uninstall() {
+  variable_del('sb_dev_use_livereload');
+}
