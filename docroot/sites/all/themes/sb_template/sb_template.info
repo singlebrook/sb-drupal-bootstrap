@@ -1,0 +1,5 @@
+name = sb_template
+description = "A boilerplate theme for Singlebrook projects."
+core = 7.x
+
+stylesheets[all][] = css/style.css
