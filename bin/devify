@@ -1,0 +1,67 @@
+#!/bin/bash
+
+# update perms on the settings file
+chmod -R a+rwx docroot/sites/default/settings.php
+
+# Check to see if the devify_config exists
+ls -lR config | grep "devify_config" > /dev/null
+# Save the exit code to a variable
+FOUND_SB_CLIENT_FILES=$?
+
+# If Exit code is 1, config was not found
+if [ $FOUND_SB_CLIENT_FILES -eq 1 ]; then
+  # Add prompt for the profile name, so the site can be installed
+  read -p "What is the name of the profile for the site? " PROFILE_NAME
+
+  # Add prompt for the client name
+  read -p "What is the client's name? " CLIENT_NAME
+
+  # Rename generic profile
+  find docroot/profiles/ -name "*sb_client*" -type f | grep -v devify | xargs sed -i '' -e "s/sb_client/$PROFILE_NAME/g"
+  find docroot/profiles/ -name "*sb_client*" -type d | while read directory; do mv "$directory" "${directory/sb_client/$PROFILE_NAME}"; done
+  find docroot/profiles/ -name "*sb_client*" -type f | while read filename; do mv "$filename" "${filename/sb_client/$PROFILE_NAME}"; done
+
+  # Rename client
+  grep -rl 'SB Client' docroot/ | grep -v devify | xargs sed -i '' -e "s/SB Client/$CLIENT_NAME/g"
+  
+  # Add prompt for email addy
+  read -p "What is your email address? " EMAIL_ADDY
+  grep -rl 'EMAIL_ADDY' docroot/ | grep -v devify | xargs sed -i '' -e "s/EMAIL_ADDY/$EMAIL_ADDY/g"
+  
+  # Rename theme template with the new name
+  theme_extension="_theme"
+  theme_name=$PROFILE_NAME$theme_extension
+  grep -rl sb_template docroot/sites/ | grep -v devify | xargs sed -i '' -e "s/sb_template/$theme_name/g"
+  find docroot/sites/all/ -name "*sb_template*" -type d | while read theme_directory; do mv "$theme_directory" "${theme_directory/sb_template/$theme_name}"; done
+  find docroot/sites/all/ -name "*sb_template*" -type f | while read theme_filename; do mv "$theme_filename" "${theme_filename/sb_template/$theme_name}"; done  
+
+  # Get the dev site url
+  read -p "What is the dev site url for this project? " DEV_BASE
+  read -p "Do you use firefox or Google chrome? " BROWSER
+  login_page="/user/login"
+  start_page="$DEV_BASE$login_page"
+
+  # Store the file for next time
+  echo -e "PROFILE_NAME=$PROFILE_NAME" >> config/devify_config
+  echo -e "PROFILE_NAME=$CLIENT_NAME" >> config/devify_config
+  echo -e "start_page=$start_page" >> config/devify_config
+  echo -e "BROWSER=$BROWSER" >> config/devify_config
+else
+  # Config was found, so source it for bash to use the vars to create the site
+  . config/devify_config
+fi
+
+# move into the docroot for drush command execution
+cd docroot
+
+# install the site
+drush -y -l default site-install $PROFILE_NAME --site-name="$CLIENT_NAME" --clean-url=1 --account-pass=testing
+
+# enable the dev module
+drush -y -l default en sb_dev
+
+# move back up to the root
+cd ../
+
+# Uncomment based on your browser prefs and vhost setup to open the login page
+/usr/bin/open -a "/Applications/$BROWSER.app" "http://$start_page"

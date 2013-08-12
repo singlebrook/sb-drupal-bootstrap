@@ -1,0 +1,22 @@
+name = SB Client Profile
+description = Replace this description with some info about the client/platform
+version = 0.1
+core = 7.x
+
+dependencies[] = field
+dependencies[] = taxonomy
+dependencies[] = menu
+dependencies[] = block
+dependencies[] = contextual
+dependencies[] = dblog
+dependencies[] = toolbar
+dependencies[] = path
+dependencies[] = file
+dependencies[] = image
+
+; Required contrib modules
+dependencies[] = ctools
+dependencies[] = context
+dependencies[] = features
+
+; Custom modules

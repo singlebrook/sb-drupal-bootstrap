@@ -1,0 +1,48 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the install profile.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * Performs actions to set up the site for this profile.
+ *
+ * @see system_install()
+ */
+function sb_client_install() {
+  // Enable default permissions for system roles.
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content'));
+  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content'));
+
+  // Create a default role for site administrators, with all available permissions assigned.
+  $admin_role = new stdClass();
+  $admin_role->name = 'administrator';
+  $admin_role->weight = 2;
+  user_role_save($admin_role);
+  user_role_grant_permissions($admin_role->rid, array_keys(module_invoke_all('permission')));
+
+  // Set this as the administrator role.
+  variable_set('user_admin_role', $admin_role->rid);
+
+  // Assign user 1 the "administrator" role.
+  db_insert('users_roles')
+    ->fields(array('uid' => 1, 'rid' => $admin_role->rid))
+    ->execute();
+
+  // Enable custom theme
+  system_rebuild_theme_data();
+  theme_enable(array('une_theme'));
+  variable_set('theme_default', 'une_theme');
+
+  // Enable caching
+  variable_set('cache', 1);
+  variable_set('page_cache_maximum_age', 1800); // Allows reverse proxies (like Varnish) to store content for up to half an hour
+
+  // Enable css and javascript aggregation by default
+  variable_set('preprocess_css', 1);
+  variable_set('preprocess_js', 1);
+
+  // Add Migrations here as necessary
+}
