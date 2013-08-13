@@ -1,5 +1,5 @@
-name = SB Client Profile
-description = Replace this description with some info about the client/platform
+name = SB_CLIENT Profile
+description = A Drupal install profile for SB_CLIENT
 version = 0.1
 core = 7.x
 
