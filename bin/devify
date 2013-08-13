@@ -35,17 +35,20 @@ if [ $FOUND_DEVIFY_CONFIG_FILE -eq 1 ]; then
   find docroot/sites/all/ -name "*sb_template*" -type d | while read theme_directory; do mv "$theme_directory" "${theme_directory/sb_template/$theme_name}"; done
   find docroot/sites/all/ -name "*sb_template*" -type f | while read theme_filename; do mv "$theme_filename" "${theme_filename/sb_template/$theme_name}"; done  
 
-  # Get the dev site url
-  read -p "What is the dev site url for this project? " site_url
-  read -p "Do you use firefox or Google chrome? " browser
-  login_page="/user/login"
-  start_page="$site_url$login_page"
-
-  # Store the file for next time
+  # Create a devify_config file
   echo -e "profile_name=$profile_name" >> config/devify_config
-  echo -e "client_name=$client_name" >> config/devify_config
-  echo -e "start_page=$start_page" >> config/devify_config
-  echo -e "browser=$browser" >> config/devify_config
+  echo -e 'client_name="$client_name"' >> config/devify_config
+  
+  # Get the browser and dev site url
+  read -p "Do you use firefox or Google chrome (optional, opens the site in the browser after creation)? " browser
+  if [ "$browser" ]; then
+    read -p "What is the dev site url for this project? " site_url
+    login_page="/user/login"
+    start_page="$site_url$login_page"
+    echo -e "start_page=$start_page" >> config/devify_config
+    echo -e "browser=$browser" >> config/devify_config
+  fi
+  
 else
   # Config was found, so source it for bash to use the vars to create the site
   . config/devify_config
@@ -63,5 +66,8 @@ drush -y -l default en sb_dev
 # move back up to the root
 cd ../
 
-# Uncomment based on your browser prefs and vhost setup to open the login page
-/usr/bin/open -a "/Applications/$browser.app" "http://$start_page"
+# open the site if the browser has been set
+if [ ! "$browser" ]; then
+  /usr/bin/open -a "/Applications/$browser.app" "http://$start_page"
+fi
+
