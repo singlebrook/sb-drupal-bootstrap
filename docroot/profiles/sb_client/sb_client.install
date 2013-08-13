@@ -33,8 +33,8 @@ function sb_client_install() {
 
   // Enable custom theme
   system_rebuild_theme_data();
-  theme_enable(array('une_theme'));
-  variable_set('theme_default', 'une_theme');
+  theme_enable(array('sb_client'));
+  variable_set('theme_default', 'sb_client');
 
   // Enable caching
   variable_set('cache', 1);
