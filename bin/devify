@@ -67,7 +67,7 @@ drush -y -l default en sb_dev
 cd ../
 
 # open the site if the browser has been set
-if [ ! "$browser" ]; then
+if [ "$browser" ]; then
   /usr/bin/open -a "/Applications/$browser.app" "http://$start_page"
 fi
 
