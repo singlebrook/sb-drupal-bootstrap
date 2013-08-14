@@ -48,6 +48,9 @@ if [ $FOUND_DEVIFY_CONFIG_FILE -eq 1 ]; then
     echo -e "start_page=$start_page" >> config/devify_config
     echo -e "browser=$browser" >> config/devify_config
   fi
+
+  # ignore the config
+  echo -e "config/devify_config" >> .gitignore
   
 else
   # Config was found, so source it for bash to use the vars to create the site
