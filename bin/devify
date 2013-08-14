@@ -31,7 +31,7 @@ if [ $FOUND_DEVIFY_CONFIG_FILE -eq 1 ]; then
   # Rename theme template with the new name
   theme_extension="_theme"
   theme_name=$profile_name$theme_extension
-  grep -rl sb_template docroot/sites/ | grep -v devify | xargs sed -i '' -e "s/sb_template/$theme_name/g"
+  grep -rl sb_template * | grep -v devify | xargs sed -i '' -e "s/sb_template/$theme_name/g"
   find docroot/sites/all/ -name "*sb_template*" -type d | while read theme_directory; do mv "$theme_directory" "${theme_directory/sb_template/$theme_name}"; done
   find docroot/sites/all/ -name "*sb_template*" -type f | while read theme_filename; do mv "$theme_filename" "${theme_filename/sb_template/$theme_name}"; done  
 
