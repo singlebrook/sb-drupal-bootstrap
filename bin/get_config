@@ -1,0 +1,12 @@
+# Check to see if the devify_config exists
+ls -lR config | grep "devify_config" > /dev/null
+# Save the exit code to a variable
+FOUND_DEVIFY_CONFIG_FILE=$?
+
+# If Exit code is 1, config was not found
+if [ $FOUND_DEVIFY_CONFIG_FILE -eq 1 ]; then
+  . bin/init
+else
+  # Config was found, so source it for bash to use the vars to create the site
+  . config/devify_config
+fi

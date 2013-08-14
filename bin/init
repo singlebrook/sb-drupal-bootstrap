@@ -1,0 +1,55 @@
+# Add prompt for the profile name, so the site can be installed
+read -p "What is the name of the profile for the site? " profile_name
+
+# Add prompt for the client name
+read -p "What is the client's name? " client_name
+
+# Rename generic profile
+find docroot/profiles/ -name "*sb_client*" -type f | grep -v devify | xargs sed -i '' -e "s/sb_client/$profile_name/g"
+find docroot/profiles/ -name "*sb_client*" -type d | while read directory; do mv "$directory" "${directory/sb_client/$profile_name}"; done
+find docroot/profiles/ -name "*sb_client*" -type f | while read filename; do mv "$filename" "${filename/sb_client/$profile_name}"; done
+
+# Rename client
+grep -rl 'SB_CLIENT' docroot/ | grep -v devify | xargs sed -i '' -e "s/SB_CLIENT/$client_name/g"
+
+# Add prompt for email addy
+read -p "What is your email address? " email_addy
+grep -rl 'EMAIL_ADDY' docroot/ | grep -v devify | xargs sed -i '' -e "s/EMAIL_ADDY/$email_addy/g"
+
+# Rename theme template with the new name
+theme_extension="_theme"
+theme_name=$profile_name$theme_extension
+grep -rl sb_template * | grep -v devify | xargs sed -i '' -e "s/sb_template/$theme_name/g"
+find docroot/sites/all/ -name "*sb_template*" -type d | while read theme_directory; do mv "$theme_directory" "${theme_directory/sb_template/$theme_name}"; done
+find docroot/sites/all/ -name "*sb_template*" -type f | while read theme_filename; do mv "$theme_filename" "${theme_filename/sb_template/$theme_name}"; done  
+
+# Create a devify_config file
+echo -e "profile_name=$profile_name" >> config/devify_config
+echo -e 'client_name="$client_name"' >> config/devify_config
+
+# Get the browser and dev site url
+read -p "Do you use firefox or Google chrome (optional, opens the site in the browser after creation)? " browser
+if [ "$browser" ]; then
+  read -p "What is the dev site url for this project? " site_url
+  login_page="/user/login"
+  start_page="$site_url$login_page"
+  echo -e "start_page=$start_page" >> config/devify_config
+  echo -e "browser=$browser" >> config/devify_config
+fi
+
+# ignore the config and sass-cache
+echo -e "config/devify_config" >> .gitignore
+echo -e "*.sass-cache" >> .gitignore
+
+# rename the readme
+mv "readme.md" "sb-drupal-bootstrap.md"
+
+# create a new readme
+echo -e "# $client_name" >> readme.md
+
+# Initialize git if it hasn't been installed
+if [ ! -d ".git" ]; then
+  git init
+  git add .
+  git commit -m 'Initial commit'
+fi

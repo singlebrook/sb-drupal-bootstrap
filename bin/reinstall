@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# update perms on the settings file
+chmod -R a+rwx docroot/sites/default/settings.php
+
+# load or create the config file
+. bin/get_config
+
+# move into the docroot for drush command execution
+cd docroot
+
+# install the site
+drush -y -l default site-install $profile_name --site-name="$client_name" --clean-url=1 --account-pass=testing
+
+# enable the dev module
+drush -y -l default en sb_dev
+
+# move back up to the root
+cd ../
+
+# open the site if the browser has been set
+if [ "$browser" ]; then
+  /usr/bin/open -a "/Applications/$browser.app" "http://$start_page"
+fi
+
