@@ -1,25 +1,18 @@
 #!/bin/bash
 
-# update perms on the settings file
-chmod -R a+rwx docroot/sites/default/settings.php
-
 # load or create the config file
-. bin/get_config
+ls -lR config | grep "devify_config" > /dev/null
+# Save the exit code to a variable
+FOUND_DEVIFY_CONFIG_FILE=$?
 
-# move into the docroot for drush command execution
-cd docroot
-
-# install the site
-drush -y -l default site-install $profile_name --site-name="$client_name" --clean-url=1 --account-pass=testing
-
-# enable the dev module
-drush -y -l default en sb_dev
-
-# move back up to the root
-cd ../
-
-# open the site if the browser has been set
-if [ "$browser" ]; then
-  /usr/bin/open -a "/Applications/$browser.app" "http://$start_page"
+# If Exit code is 1, config was not found
+if [ $FOUND_DEVIFY_CONFIG_FILE -eq 1 ]; then 
+  # Initialize the project
+  . bin/init
+else
+  # Config was found, so source it for bash to use the vars to create the site
+  . config/devify_config
 fi
 
+# Run the install
+. config/install

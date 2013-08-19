@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Add prompt for the profile name, so the site can be installed
 read -p "What is the name of the profile for the site? " profile_name
 
@@ -18,8 +20,8 @@ grep -rl 'EMAIL_ADDY' docroot/ | grep -v devify | xargs sed -i '' -e "s/EMAIL_AD
 
 # Rename theme template with the new name
 theme_extension="_theme"
-theme_name=$profile_name$theme_extension
-grep -rl sb_template * | grep -v devify | xargs sed -i '' -e "s/sb_template/$theme_name/g"
+theme_name="$profile_name$theme_extension"
+grep -rl 'sb_template' docroot/ | grep -v devify | xargs sed -i '' -e "s/sb_template/$theme_name/g"
 find docroot/sites/all/ -name "*sb_template*" -type d | while read theme_directory; do mv "$theme_directory" "${theme_directory/sb_template/$theme_name}"; done
 find docroot/sites/all/ -name "*sb_template*" -type f | while read theme_filename; do mv "$theme_filename" "${theme_filename/sb_template/$theme_name}"; done  
 
@@ -53,3 +55,6 @@ if [ ! -d ".git" ]; then
   git add .
   git commit -m 'Initial commit'
 fi
+
+# Run the install
+. bin/install
