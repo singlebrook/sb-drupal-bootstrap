@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Start by removing the original devify_config
+rm config/devify_config
+
 # Add prompt for the profile name, so the site can be installed
 read -p "What is the name of the profile for the site? " profile_name
 

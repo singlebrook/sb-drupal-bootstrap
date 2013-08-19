@@ -5,7 +5,7 @@ The Singlebrook Drupal Bootstrap is a starting point for new Drupal projects. Hi
   - A ready-to-go profile and theme
   - A custom Dev module that wraps useful dev tools like devel, diff and field_ui
 
-## Project Setup
+## New Project Setup
 You can read more about the bash scripts in the readme of the `bin` folder. Typical setup is as follows:
   1. Download the zipped version of the project from https://github.com/singlebrook/sb-drupal-bootstrap
   2. Configure your vhost, if necessary
@@ -24,3 +24,6 @@ This project is configured with guard to watch for changes to the scss and js fi
   - run `bundle install` once from the project root to download guard and livereload utilities
 
 To start theming, run `bin/themify` from the project root and edited Sass and js files will automagically reload in the browser. To stop the guard and livereload processes, hit `^c` (control + c).
+
+## Local Development to SB Drupal Bootstrap
+It is not advised to run the init script if you're updating the bootstrap itself. Instead, confirm the settings in `config/devify_config` and run the project with the sb_client profile and sb_template theme. Themify will work out of the box, and simplify updates to the bootstrap.
