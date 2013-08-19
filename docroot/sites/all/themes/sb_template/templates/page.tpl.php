@@ -1,4 +1,4 @@
-<div id="page-wrapper"><div id="page">
+<div id="page-wrapper" class="container"><div id="page">
 
   <header role="banner">
 
