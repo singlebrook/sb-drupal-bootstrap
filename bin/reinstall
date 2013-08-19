@@ -15,4 +15,4 @@ else
 fi
 
 # Run the install
-. config/install
+. bin/install
