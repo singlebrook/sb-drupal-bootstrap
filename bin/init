@@ -41,7 +41,6 @@ fi
 
 # ignore the config and sass-cache
 echo -e "config/devify_config" >> .gitignore
-echo -e "*.sass-cache" >> .gitignore
 
 # rename the readme
 mv "readme.md" "sb-drupal-bootstrap.md"
