@@ -27,7 +27,7 @@ find docroot/sites/all/ -name "*sb_template*" -type f | while read theme_filenam
 
 # Create a devify_config file
 echo -e "profile_name=$profile_name" >> config/devify_config
-echo -e 'client_name="$client_name"' >> config/devify_config
+echo -e "client_name='$client_name'" >> config/devify_config
 
 # Get the browser and dev site url
 read -p "Do you use firefox or Google chrome (optional, opens the site in the browser after creation)? " browser
