@@ -32,15 +32,11 @@ find docroot/sites/all/ -name "*sb_template*" -type f | while read theme_filenam
 echo -e "profile_name=$profile_name" >> config/devify_config
 echo -e "client_name='$client_name'" >> config/devify_config
 
-# Get the browser and dev site url
-read -p "Do you use firefox or Google chrome (optional, opens the site in the browser after creation)? " browser
-if [ "$browser" ]; then
-  read -p "What is the dev site url for this project? " site_url
-  login_page="/user/login"
-  start_page="$site_url$login_page"
-  echo -e "start_page=$start_page" >> config/devify_config
-  echo -e "browser=$browser" >> config/devify_config
-fi
+# Get the site url and save it to the config
+read -p "What is the dev site url for this project? " site_url
+login_page="/user/login"
+start_page="$site_url$login_page"
+echo -e "start_page=$start_page" >> config/devify_config
 
 # ignore the config and sass-cache
 echo -e "config/devify_config" >> .gitignore
