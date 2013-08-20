@@ -37,14 +37,14 @@ textarea, {
 	display: block;
 	outline: none;
 	min-width: $form-item-min-width;
-	width: 100%;
+	width: auto;
 	background: $input-bg;
 	border: 1px solid $input-border;
 	font-size: $input-size;
 	line-height: 1;
 	color: $input-color;
 	padding: 10px;
-	margin-bottom: 20px;
+	margin-bottom: 5px;
 
 	&:focus {
 		cursor: pointer;
@@ -67,7 +67,7 @@ textarea {
 select {
 	padding: 3px;
 	min-width: $form-item-min-width;
-	width: 100%;
+	width: auto;
 	margin: 0;
 
 	optgroup {
