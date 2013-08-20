@@ -36,7 +36,6 @@ input[id="text_inline"],
 textarea, {
 	display: block;
 	outline: none;
-	min-width: $form-item-min-width;
 	width: auto;
 	background: $input-bg;
 	border: 1px solid $input-border;
@@ -66,7 +65,6 @@ textarea {
 
 select {
 	padding: 3px;
-	min-width: $form-item-min-width;
 	width: auto;
 	margin: 0;
 
