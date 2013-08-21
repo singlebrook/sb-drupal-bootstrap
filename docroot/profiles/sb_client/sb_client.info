@@ -18,5 +18,8 @@ dependencies[] = image
 dependencies[] = ctools
 dependencies[] = context
 dependencies[] = features
+dependencies[] = strongarm
+dependencies[] = token
+dependencies[] = pathauto
 
 ; Custom modules
