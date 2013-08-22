@@ -6,8 +6,8 @@ The Singlebrook Drupal Bootstrap is a starting point for new Drupal projects. Hi
   - A custom Dev module that wraps useful dev tools like devel, diff and field_ui
 
 ## New Project Setup
-You can read more about the bash scripts in the readme of the `bin` folder. Typical setup is as follows:
-  1. Download the zipped version of the project from https://github.com/singlebrook/sb-drupal-bootstrap
+You can read more about the bash scripts in the [readme](https://github.com/singlebrook/sb-drupal-bootstrap/tree/master/bin) of the `bin` folder. Typical setup is as follows:
+  1. [Download](https://github.com/singlebrook/sb-drupal-bootstrap/zipball/master) the zipped version of the project
   2. Configure your vhost, if necessary
   3. Create your db
   4. Create a `sites/default/settings.php` file or run installer up to the "Configure site" pane.
