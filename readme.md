@@ -13,7 +13,7 @@ You can read more about the bash scripts in the [readme](https://github.com/sing
   4. Create a `sites/default/settings.php` file or run installer up to the "Configure site" pane.
   5. Run `bin/init` from the project root and answer questions
 
-Your responses to the questions in the init script will set up the site for the new client and replace a bunch of placholder variables in the profile and theme. It will also rename this readme and create a new, blank readme and initialize the new git repo.
+Your responses to the questions in the init script will set up the site for the new client and replace a bunch of placholder variables in the profile and theme. It will also rename this readme and create a new, blank readme and initialize the new git repo, before running a drush site-install. The Drupal username post-install is 'admin' and the password is 'testing'.
  
 ## Theming with Guard and Livereload
 This project is configured with guard to watch for changes to the scss and js files and compile them. There is a an executable script in the bin folder which starts both the guardfile and the livereload server. 
