@@ -10,7 +10,9 @@
 @import "base/mixins";
 @import "base/responsive-mixins";
 @import "base/stark";
-@import "base/admin";
+
+// Admin
+@import "admin/view";
 
 // Basic
 @import "basic/fonts";
