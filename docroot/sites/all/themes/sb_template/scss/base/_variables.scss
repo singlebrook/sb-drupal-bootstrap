@@ -1,17 +1,18 @@
 // ==================================================
 // Structure
 // ==================================================
-$bg-body: #ececec;
+
 
 // ==================================================
 // Brand
 // ==================================================
-$brand: #5e9f00;
-$brand-second: #5e9f00;
-$brand-third: #5e9f00;
+$brand: #00D6DD;
+//$brand-second: #5e9f00;
+//$brand-third: #5e9f00;
 
 $selection: #212121;
 $highlight: #ffc;
+$bg-body: $brand;
 
 // ==================================================
 // Typography
@@ -49,10 +50,10 @@ $h5-link-hover: #212121;
 $h6-link-hover: #212121;
 
 $p-text: #212121;
-$p-size: 1.3em;
+$p-size: 1em;
 
-$link: #333;
-$link-hover: #000;
+$link: darken($brand, 5%);
+$link-hover: $brand;
 
 $rule: #212121;
 

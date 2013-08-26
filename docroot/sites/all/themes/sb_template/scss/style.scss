@@ -2,14 +2,15 @@
 @import "compass/css3";
 
 // Base
-@import "base/reset"; // Choose reset or normalize for the theme; DO NOT use both
-// @import "base/normalize"; 
+//@import "base/reset"; // Choose reset or normalize for the theme; DO NOT use both
+@import "base/normalize"; 
 @import "base/variables";
 @import "base/base";
 @import "base/grid";
 @import "base/mixins";
 @import "base/responsive-mixins";
 @import "base/stark";
+@import "base/admin";
 
 // Basic
 @import "basic/fonts";
