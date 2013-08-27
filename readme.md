@@ -26,4 +26,4 @@ This project is configured with guard to watch for changes to the scss and js fi
 To start theming, run `$ bin/themify` from the project root and edited Sass and js files will automagically reload in the browser. To stop the guard and livereload processes, hit `^c` (control + c).
 
 ## Local Development to SB Drupal Bootstrap
-It is not advised to run the init script if you're updating the bootstrap itself. Instead, confirm the settings in `config/devify_config` and run the project with the sb_client profile and sb_template theme. Themify will work out of the box, and simplify updates to the bootstrap.
+It is not advised to run the init script if you're updating the bootstrap itself. Instead, run the project with the sb_client profile and sb_template theme. Themify will work out of the box, and simplify updates to the bootstrap.
