@@ -67,3 +67,6 @@ if [ "$INIT_GIT" = "y" ]; then
   fi
 fi
 
+echo "Congratulations! Your new site is ready for installation!\n"
+
+exit 0
