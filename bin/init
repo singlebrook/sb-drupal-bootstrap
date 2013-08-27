@@ -51,11 +51,20 @@ echo -e "# $CLIENT_NAME" >> readme.md
 # delete this file
 rm bin/init
 
+# Ask about initialization of git, defaulting to yes
+read -p "Initialize a git repository? [y]: " INIT_GIT
+INIT_GIT=${INIT_GIT:-y}
+
 # Initialize git if it hasn't been installed
-if [ ! -d ".git" ]; then
-  git init
-  git add .
-  git commit -m 'Initial commit'
+if [ "$INIT_GIT" = "y" ]; then
+  if [ ! -d ".git" ]; then
+    git init
+    git add .
+    git commit -m 'Initial commit'
+  else
+    echo "You already have a .git directory!"
+    exit 2
+  fi
 fi
 
 # Run the install
