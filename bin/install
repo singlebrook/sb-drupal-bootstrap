@@ -1,5 +1,15 @@
 #!/bin/bash
 
+if [ ! -d "docroot" ]; then
+  echo 'Please be sure that you are running this command from your project root.'
+  exit 1
+fi
+
+if [ ! -f "docroot/sites/default/settings.php" ]; then
+  echo 'Please create a settings file at docroot/sites/default/settings.php first!'
+  exit 2
+fi
+
 # update perms on the settings file
 chmod -R a+rwx docroot/sites/default/settings.php
 
