@@ -7,7 +7,7 @@ chmod -R a+rwx docroot/sites/default/settings.php
 cd docroot
 
 # install the site
-drush -y -l default site-install $profile_name --site-name="$client_name" --clean-url=1 --account-pass=testing
+drush -y -l default site-install sb_client --site-name="CLIENT_NAME" --clean-url=1 --account-pass=testing
 
 # enable the dev module
 drush -y -l default en sb_dev
@@ -15,4 +15,5 @@ drush -y -l default en sb_dev
 # move back up to the root
 cd ../
 
-open "http://$start_page"
+# optionally edit the dev site url and uncomment for convenience
+# open "http://siteurl.dev"

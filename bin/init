@@ -10,12 +10,12 @@ read -p "What is the name of the profile for the site? " profile_name
 read -p "What is the client's name? " client_name
 
 # Rename generic profile
-find docroot/profiles/ -name "*sb_client*" -type f | grep -v devify | xargs sed -i '' -e "s/sb_client/$profile_name/g"
+grep -rl "sb_client" . | egrep -v 'init|\.git|default' | xargs sed -i '' -e "s/sb_client/$profile_name/g"
 find docroot/profiles/ -name "*sb_client*" -type d | while read directory; do mv "$directory" "${directory/sb_client/$profile_name}"; done
 find docroot/profiles/ -name "*sb_client*" -type f | while read filename; do mv "$filename" "${filename/sb_client/$profile_name}"; done
 
 # Rename client
-grep -rl 'SB_CLIENT' docroot/ | grep -v devify | xargs sed -i '' -e "s/SB_CLIENT/$client_name/g"
+grep -rl 'CLIENT_NAME' . | egrep -v 'init|\.git|default' | xargs sed -i '' -e "s/CLIENT_NAME/$client_name/g"
 
 # Add prompt for email addy
 read -p "What is your email address? " email_addy
@@ -24,28 +24,18 @@ grep -rl 'EMAIL_ADDY' docroot/ | grep -v devify | xargs sed -i '' -e "s/EMAIL_AD
 # Rename theme template with the new name
 theme_extension="_theme"
 theme_name="$profile_name$theme_extension"
-grep -rl "sb_template" . | egrep -v 'bin|\.git' | xargs sed -i '' -e "s/sb_template/$theme_name/g"
+grep -rl "sb_template" . | egrep -v 'init|\.git' | xargs sed -i '' -e "s/sb_template/$theme_name/g"
 find docroot/sites/all/ -name "*sb_template*" -type d | while read theme_directory; do mv "$theme_directory" "${theme_directory/sb_template/$theme_name}"; done
-find docroot/sites/all/ -name "*sb_template*" -type f | while read theme_filename; do mv "$theme_filename" "${theme_filename/sb_template/$theme_name}"; done  
-
-# Create a devify_config file
-echo -e "profile_name=$profile_name" >> config/devify_config
-echo -e "client_name='$client_name'" >> config/devify_config
-
-# Get the site url and save it to the config
-read -p "What is the dev site url for this project? " site_url
-login_page="/user/login"
-start_page="$site_url$login_page"
-echo -e "start_page=$start_page" >> config/devify_config
-
-# ignore the config and sass-cache
-echo -e "config/devify_config" >> .gitignore
+find docroot/sites/all/ -name "*sb_template*" -type f | while read theme_filename; do mv "$theme_filename" "${theme_filename/sb_template/$theme_name}"; done
 
 # rename the readme
 mv "readme.md" "sb-drupal-bootstrap.md"
 
 # create a new readme
 echo -e "# $client_name" >> readme.md
+
+# delete this file
+rm bin/init
 
 # Initialize git if it hasn't been installed
 if [ ! -d ".git" ]; then
@@ -55,4 +45,4 @@ if [ ! -d ".git" ]; then
 fi
 
 # Run the install
-. bin/install
+. bin/reinstall

@@ -1,5 +1,5 @@
-name = SB_CLIENT Profile
-description = A Drupal install profile for SB_CLIENT
+name = CLIENT_NAME Profile
+description = A Drupal install profile for CLIENT_NAME
 version = 0.1
 core = 7.x
 
