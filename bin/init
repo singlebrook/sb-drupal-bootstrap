@@ -42,4 +42,4 @@ if [ ! -d ".git" ]; then
 fi
 
 # Run the install
-. bin/reinstall
+. bin/install
