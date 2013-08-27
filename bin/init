@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ ! -d "docroot" ]; then
+  echo 'Please be sure that you are running this command from your project root.'
+  exit 1
+fi
+
 # Add prompt for the profile name, so the site can be installed
 read -p "What is the name of the profile for the site? " profile_name
 

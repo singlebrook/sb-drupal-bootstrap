@@ -2,6 +2,11 @@
 
 # This script starts guard and livereload for simplified theming
 
+if [ ! -d "docroot" ]; then
+  echo 'Please be sure that you are running this command from your project root.'
+  exit 1
+fi
+
 cd docroot
 drush en sb_dev -y
 drush vset sb_dev_use_livereload TRUE
