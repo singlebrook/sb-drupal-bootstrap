@@ -67,5 +67,3 @@ if [ "$INIT_GIT" = "y" ]; then
   fi
 fi
 
-# Run the install
-. bin/install
