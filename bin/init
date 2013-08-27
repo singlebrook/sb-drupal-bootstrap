@@ -8,6 +8,9 @@ fi
 # Add prompt for the profile name, so the site can be installed
 read -p "What is the name of the profile for the site? " PROFILE_NAME
 
+# Remove spaces and lowercase the profile name
+PROFILE_NAME=$(sed 's/ /_/g' <<< $PROFILE_NAME | awk '{print tolower($0)}')
+
 # Add prompt for the client name
 read -p "What is the client's name? " CLIENT_NAME
 
