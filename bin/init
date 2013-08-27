@@ -15,7 +15,7 @@ PROFILE_NAME=$(sed 's/ /_/g' <<< $PROFILE_NAME | awk '{print tolower($0)}')
 read -p "What is the client's name? " CLIENT_NAME
 
 # Escape single quotes from the client name
-CLIENT_NAME=$(sed "s/'/\\\'/g" <<< $CLIENT_NAME | awk '{print tolower($0)}')
+CLIENT_NAME=$(sed "s/'/\&rsquo;/g" <<< $CLIENT_NAME)
 
 # Rename functions in the profile
 grep -rl "sb_client" . | grep -v 'init|\.git|default' | xargs sed -i '' -e "s/sb_client/$PROFILE_NAME/g"
