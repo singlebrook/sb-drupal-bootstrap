@@ -24,6 +24,3 @@ drush -y -l default en sb_dev
 
 # move back up to the root
 cd ../
-
-# optionally edit the dev site url and uncomment for convenience
-# open "http://siteurl.dev"
