@@ -32,20 +32,20 @@
 
   </header> <!-- / header -->
 
-  <?php if ($main_menu || $secondary_menu): ?>
-    <nav role="navigation" id="navigation">
+  <?php /* TODO: Consider replacing this with a fully expanded suckerfish menu */ ?>
+  <?php if ($main_menu): ?>
+    <nav role="navigation" class="main">
       <?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('id' => 'main-menu', 'class' => array('links', 'inline', 'clearfix')), 'heading' => t('Main menu'))); ?>
-      <?php print theme('links__system_secondary_menu', array('links' => $secondary_menu, 'attributes' => array('id' => 'secondary-menu', 'class' => array('links', 'inline', 'clearfix')), 'heading' => t('Secondary menu'))); ?>
     </nav> <!-- / nav -->
-  <?php endif; ?>
-
-  <?php if ($breadcrumb): ?>
-    <div id="breadcrumb"><?php print $breadcrumb; ?></div>
   <?php endif; ?>
 
   <?php print $messages; ?>
 
   <div id="main" class="clearfix" role="main">
+
+    <?php if ($breadcrumb): ?>
+      <div id="breadcrumb"><?php print $breadcrumb; ?></div>
+    <?php endif; ?>
 
     <div id="content" class="column"><div class="section">
       <?php if ($page['highlighted']): ?><div id="highlighted"><?php print render($page['highlighted']); ?></div><?php endif; ?>
@@ -76,6 +76,11 @@
 
   <footer role="contentinfo">
     <div class="section">
+      <?php if ($secondary_menu): ?>
+        <nav role="navigation" class="secondary">
+          <?php print theme('links__system_secondary_menu', array('links' => $secondary_menu, 'attributes' => array('id' => 'secondary-menu', 'class' => array('links', 'inline', 'clearfix')), 'heading' => t('Secondary menu'))); ?>
+        </nav> <!-- / nav -->
+      <?php endif; ?>
       <?php print render($page['footer']); ?>
     </div>  <!-- /.section -->
   </footer> <!-- / footer -->
