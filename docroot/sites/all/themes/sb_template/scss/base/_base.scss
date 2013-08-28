@@ -27,6 +27,10 @@ body {
   background-color: $bg-body;
 }
 
+fieldset {
+  margin-bottom: 1em;
+}
+
 // ==================================================
 // Header
 // ==================================================
@@ -34,7 +38,7 @@ body {
 header {
   #logo { float: left; margin-right: 2em; }
 
-  #name-and-slogan { 
+  #name-and-slogan {
     font-size: 2em;
     padding-top: 2em;
   }
@@ -44,11 +48,11 @@ header {
 // Navigation
 // ==================================================
 
-#navigation { 
-  clear: both; 
+#navigation {
+  clear: both;
   h2 { display: none; }
 
-  #secondary-menu { 
+  #secondary-menu {
     position: absolute;
     top: 20px;
     right: 0;
@@ -60,51 +64,4 @@ header {
 // ==================================================
 #main {
   clear: both;
-}
-
-// ==================================================
-// Tabs
-// ==================================================
-ul.tabs {
-  display: inline-block;
-  margin: 0;
-  border: 0;
-  padding: 0;
-  position: relative;
-  list-style-image: none;
-  background-color: #f6f6f6;
-  border-top: 1px solid #ddd;
-  border-left: 1px solid #ddd;
-  width: 100%;
-  clear: both;
-  @include box-sizing(border-box);
-
-  li, li.active {
-    border-right: 1px solid rgb(204, 204, 204);
-    margin: 0;
-    font-size: 14px;
-    min-width: 5em;
-    float: left;
-
-    a {
-      background: #eee;
-      margin: 0;
-      display: block;
-      text-decoration: none;
-      padding: 0.5em 1em 0.3em 1em;
-      position: relative;
-      top: 0px;
-      border-style: none;
-      border-width: 0;
-      text-align: center;
-
-      &.active {
-        background: #fff;
-      }
-
-      &:hover {
-        background: #ededdd;
-      }
-    }
-  }
 }

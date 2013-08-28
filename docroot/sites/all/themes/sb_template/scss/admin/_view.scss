@@ -4,14 +4,6 @@
 
 body.page-admin, body.page-node-add, body.page-node-edit {
   
-  #sidebar-first, #sidebar-second, .sidebar {
-    display: none;
-  }
-  #content {
-    width: 100%;
-    margin: 0;
-    left: 0;
-  }
   .admin-panel {
     background: #efefef;
     border: 1px solid #ccc;
@@ -21,9 +13,23 @@ body.page-admin, body.page-node-add, body.page-node-edit {
     dd {
       border-bottom: 1px solid #ccc;
       padding: .5em 0;
+
+      &:last-child {
+        border: none;
     }
   }
+  }
+
+  // border box does strange things to Drupals listing drag handles, so disable it
+  .tabledrag-handle .handle {
+    box-sizing: content-box;
+  }
+
+  table {
+    font-size: .8rem;
+  }
 }
+
 
 // ==================================================
 // From Bartik

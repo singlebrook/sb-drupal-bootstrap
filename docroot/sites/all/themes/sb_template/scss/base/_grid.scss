@@ -47,7 +47,6 @@ $col_total_width: $col_width + $col_margin;
 	max-width: $max-width;
 	margin: 0 auto;
 	padding: 0 20px;
-	background: #fff;
 }
 
 .row { @include row; }

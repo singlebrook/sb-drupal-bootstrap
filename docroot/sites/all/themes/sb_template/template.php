@@ -12,3 +12,12 @@ function sb_template_preprocess_page(&$variables) {
 
   drupal_add_js($variables['directory'] . '/js/vendor/modernizr-2.6.2.min.js');
 }
+
+/**
+ * Implements hook_js_alter().
+ *
+ * Disables sticky table headers FTW!
+ */
+function sb_template_js_alter(&$js) {
+  unset($js['misc/tableheader.js']);
+}
